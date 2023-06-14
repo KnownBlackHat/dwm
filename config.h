@@ -67,8 +67,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont}
 static const char *termcmd[]  = { "st", NULL };
 
 // screen shot
-static const char *screenshotclip[] = {"xfce4-screenshooter", "-cr", NULL};
-static const char *screenshothost[] = {"xfce4-screenshooter", "-cri", NULL};
+static const char *screenshotclip[] = {"scrot", "--freeze","-s", "/tmp/screenshot.png", "-e", "xclip -selection clipboard -t image/png -i $f", NULL};
+static const char *screenshothost[] = {"scrot", "--freeze", "-s", "/tmp/screenshot.png", "-e", "curl -s -F 'image=@$f' https://api.imgur.com/3/upload | jq .data.link | sed 's/\"//g'  | xclip -selection clipboard && notify-send 'Image 🔗 ready on 📋'", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
